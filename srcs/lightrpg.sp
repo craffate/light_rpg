@@ -59,6 +59,8 @@ static void		LoadConfig()
 			g_Config.xp_max = kv.GetNum("max");
 			g_Config.xp_per_kill = kv.GetNum("per_kill");
 			g_Config.xp_mul_per_hit = kv.GetFloat("mul_per_hit");
+			g_Config.xp_req = kv.GetNum("req");
+			g_Config.xp_req_mul = kv.GetFloat("req_mul");
 		}
 	} while (kv.GotoNextKey());
 }
