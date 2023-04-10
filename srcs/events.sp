@@ -12,10 +12,8 @@ public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 		level = CalcLevel(g_Stats[client].xp);
 		if (g_Stats[client].level < level)
 		{
-			g_Stats[client].xp -= CalcRequiredXp(g_Stats[client].level);
-			g_Stats[client].level = level;
+			levelUp(client)
 		}
-
 	}
 }
 
@@ -31,8 +29,18 @@ public void	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 		level = CalcLevel(g_Stats[client].xp);
 		if (g_Stats[client].level < level)
 		{
-			g_Stats[client].xp -= CalcRequiredXp(g_Stats[client].level);
-			g_Stats[client].level = level;
+			levelUp(client)
 		}
+	}
+}
+
+public void	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
+{
+	int	client;
+
+	client = GetClientOfUserId(event.GetInt("userid"));
+	if (IsClientConnected(client) && IsClientInGame(client))
+	{
+		setHp(client, g_Stats[client].max_hp);
 	}
 }

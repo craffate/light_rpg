@@ -16,6 +16,7 @@ public Plugin		myinfo =
 public void		OnPluginStart()
 {
 	LoadConfig();
+	HookEvent("player_spawn", Event_PlayerSpawn, EventHookMode_Post);
 	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 }
@@ -73,6 +74,10 @@ static void		LoadConfig()
 			g_Config.hud_b = kv.GetNum("b");
 			g_Config.hud_a = kv.GetNum("a");
 			g_Config.hud_refresh = kv.GetFloat("refresh");
+		}
+		else if (StrEqual(buf, "HP"))
+		{
+			g_Config.hp_per_level = kv.GetNum("per_level");
 		}
 	} while (kv.GotoNextKey());
 }

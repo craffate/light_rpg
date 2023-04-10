@@ -14,12 +14,14 @@ enum struct	Config
 	int	hud_b;
 	int	hud_a;
 	float	hud_refresh;
+	int	hp_per_level;
 }
 
 enum struct	Stats
 {
 	int	xp;
 	int	level;
+	int	max_hp;
 }
 
 Config		g_Config;
