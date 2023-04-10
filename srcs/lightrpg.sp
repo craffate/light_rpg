@@ -1,6 +1,7 @@
 #include "lightrpg.inc"
 #include "events.sp"
 #include "stats.sp"
+#include "timers.sp"
 
 public Plugin		myinfo =
 {
@@ -15,7 +16,6 @@ public Plugin		myinfo =
 public void		OnPluginStart()
 {
 	LoadConfig();
-	HookEvent("player_spawn", Event_OnPlayerSpawn, EventHookMode_Post);
 	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 }
@@ -29,6 +29,8 @@ public void		OnMapStart()
 	{
 		ResetStats(idx);
 	}
+	g_HudSync = CreateHudSynchronizer();
+	CreateTimer(g_Config.hud_refresh, Timer_ShowHud, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 }
 
 public void		OnClientPutInServer(int client)
@@ -61,6 +63,16 @@ static void		LoadConfig()
 			g_Config.xp_mul_per_hit = kv.GetFloat("mul_per_hit");
 			g_Config.xp_req = kv.GetNum("req");
 			g_Config.xp_req_mul = kv.GetFloat("req_mul");
+		}
+		else if (StrEqual(buf, "HUD"))
+		{
+			g_Config.hud_x = kv.GetFloat("x");
+			g_Config.hud_y = kv.GetFloat("y");
+			g_Config.hud_r = kv.GetNum("r");
+			g_Config.hud_g = kv.GetNum("g");
+			g_Config.hud_b = kv.GetNum("b");
+			g_Config.hud_a = kv.GetNum("a");
+			g_Config.hud_refresh = kv.GetFloat("refresh");
 		}
 	} while (kv.GotoNextKey());
 }
