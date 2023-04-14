@@ -42,5 +42,10 @@ public void	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
 	if (IsClientConnected(client) && IsClientInGame(client))
 	{
 		setHp(client, g_Stats[client].max_hp);
+		SetArmor(client, g_Stats[client].max_armor);
+		if (0 < g_Config.armor_give_helmet)
+		{
+			GiveHelmet(client);
+		}
 	}
 }

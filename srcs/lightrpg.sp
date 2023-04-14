@@ -79,5 +79,10 @@ static void		LoadConfig()
 		{
 			g_Config.hp_per_level = kv.GetNum("per_level");
 		}
+		else if (StrEqual(buf, "armor"))
+		{
+			g_Config.armor_per_level = kv.GetNum("per_level");
+			g_Config.armor_give_helmet = kv.GetNum("give_helmet");
+		}
 	} while (kv.GotoNextKey());
 }
