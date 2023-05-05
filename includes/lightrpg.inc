@@ -1,4 +1,5 @@
 #include <sourcemod>
+#include <sdkhooks>
 
 enum struct	Config
 {
@@ -15,6 +16,7 @@ enum struct	Config
 	int	hud_a;
 	float	hud_refresh;
 	int	hp_per_level;
+	float	damage_mul_per_level;
 	int	armor_per_level;
 	int	armor_give_helmet;
 }
@@ -25,6 +27,7 @@ enum struct	Stats
 	int	level;
 	int	max_hp;
 	int	max_armor;
+	float	damage_mul;
 }
 
 Config		g_Config;

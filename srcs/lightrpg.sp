@@ -2,6 +2,7 @@
 #include "events.sp"
 #include "stats.sp"
 #include "timers.sp"
+#include "hooks.sp"
 
 public Plugin		myinfo =
 {
@@ -11,7 +12,6 @@ public Plugin		myinfo =
 	version = "0.1",
 	url = ""
 };
-
 
 public void		OnPluginStart()
 {
@@ -37,6 +37,7 @@ public void		OnMapStart()
 public void		OnClientPutInServer(int client)
 {
 	ResetStats(client);
+	SDKHook(client, SDKHook_OnTakeDamage, Hook_OnTakeDamage);
 }
 
 public void		OnClientDisconnect(int client)
@@ -78,6 +79,10 @@ static void		LoadConfig()
 		else if (StrEqual(buf, "HP"))
 		{
 			g_Config.hp_per_level = kv.GetNum("per_level");
+		}
+		else if (StrEqual(buf, "damage"))
+		{
+			g_Config.damage_mul_per_level = kv.GetFloat("mul_per_level");
 		}
 		else if (StrEqual(buf, "armor"))
 		{
