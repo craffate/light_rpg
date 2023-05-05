@@ -7,7 +7,7 @@ void		ResetStats(int client)
 	g_Stats[client].max_armor = 100;
 }
 
-void		levelUp(int client)
+void		LevelUp(int client)
 {
 	int	curr_health;
 	int	curr_armor;
@@ -31,8 +31,8 @@ void		levelUp(int client)
 	g_Stats[client].max_hp = g_Stats[client].max_hp + g_Config.hp_per_level;
 	g_Stats[client].damage_mul += g_Config.damage_mul_per_level;
 	g_Stats[client].max_armor = max_armor;
-	setMaxHp(client, g_Stats[client].max_hp);
-	setHp(client, curr_health + g_Config.hp_per_level);
+	SetMaxHp(client, g_Stats[client].max_hp);
+	SetHp(client, curr_health + g_Config.hp_per_level);
 	SetArmor(client, armor);
 }
 
@@ -46,12 +46,12 @@ int		CalcRequiredXp(int level)
 	return RoundFloat(level * g_Config.xp_req_mul * g_Config.xp_req);
 }
 
-void		setHp(int client, int amount)
+void		SetHp(int client, int amount)
 {
 	SetEntProp(client, Prop_Send, "m_iHealth", amount);
 }
 
-void		setMaxHp(int client, int amount)
+void		SetMaxHp(int client, int amount)
 {
 	SetEntProp(client, Prop_Data, "m_iMaxHealth", amount);
 }
