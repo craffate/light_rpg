@@ -17,6 +17,7 @@ enum struct	Config
 	float	hud_refresh;
 	int	hp_per_level;
 	float	damage_mul_per_level;
+	float	speed_mul_per_level;
 	int	armor_per_level;
 	int	armor_give_helmet;
 }
@@ -28,6 +29,7 @@ enum struct	Stats
 	int	max_hp;
 	int	max_armor;
 	float	damage_mul;
+	float	speed_mul;
 }
 
 Config		g_Config;

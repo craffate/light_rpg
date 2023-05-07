@@ -43,6 +43,7 @@ public void	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
 	{
 		SetHp(client, g_Stats[client].max_hp);
 		SetArmor(client, g_Stats[client].max_armor);
+		SetSpeed(client, g_Stats[client].speed_mul);
 		if (0 < g_Config.armor_give_helmet)
 		{
 			GiveHelmet(client);

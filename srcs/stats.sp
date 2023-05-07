@@ -4,6 +4,7 @@ void		ResetStats(int client)
 	g_Stats[client].level = 1;
 	g_Stats[client].max_hp = 100;
 	g_Stats[client].damage_mul = 1.0;
+	g_Stats[client].speed_mul = 1.0
 	g_Stats[client].max_armor = 100;
 }
 
@@ -30,10 +31,12 @@ void		LevelUp(int client)
 	g_Stats[client].level = g_Stats[client].level + 1;
 	g_Stats[client].max_hp = g_Stats[client].max_hp + g_Config.hp_per_level;
 	g_Stats[client].damage_mul += g_Config.damage_mul_per_level;
+	g_Stats[client].speed_mul += g_Config.speed_mul_per_level;
 	g_Stats[client].max_armor = max_armor;
 	SetMaxHp(client, g_Stats[client].max_hp);
 	SetHp(client, curr_health + g_Config.hp_per_level);
 	SetArmor(client, armor);
+	SetSpeed(client, g_Stats[client].speed_mul);
 }
 
 int		CalcLevel(int xp)
@@ -64,4 +67,9 @@ void		SetArmor(int client, int amount)
 void		GiveHelmet(int client)
 {
 	SetEntProp(client, Prop_Send, "m_bHasHelmet", 1);
+}
+
+void		SetSpeed(int client, float amount)
+{
+	SetEntPropFloat(client, Prop_Data, "m_flLaggedMovementValue", amount);
 }

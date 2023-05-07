@@ -84,6 +84,10 @@ static void		LoadConfig()
 		{
 			g_Config.damage_mul_per_level = kv.GetFloat("mul_per_level");
 		}
+		else if (StrEqual(buf, "speed"))
+		{
+			g_Config.speed_mul_per_level = kv.GetFloat("mul_per_level");
+		}
 		else if (StrEqual(buf, "armor"))
 		{
 			g_Config.armor_per_level = kv.GetNum("per_level");
