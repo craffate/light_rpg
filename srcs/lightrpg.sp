@@ -32,6 +32,8 @@ public void		OnMapStart()
 	}
 	g_HudSync = CreateHudSynchronizer();
 	CreateTimer(g_Config.hud_refresh, Timer_ShowHud, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
+	AddFileToDownloadsTable("sound/lightrpg/lvup.wav");
+	PrecacheSound("lightrpg/lvup.wav");
 }
 
 public void		OnClientPutInServer(int client)
