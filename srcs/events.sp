@@ -5,7 +5,10 @@ public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 	int	level;
 
 	client = GetClientOfUserId(event.GetInt("attacker"));
-	if (IsClientConnected(client) && IsClientInGame(client) && g_Config.xp_max > g_Stats[client].xp)
+	if (0 < client
+	&& IsClientConnected(client)
+	&& IsClientInGame(client)
+	&& g_Config.xp_max > g_Stats[client].xp)
 	{
 		total = RoundFloat(event.GetInt("dmg_health") * g_Config.xp_mul_per_hit);
 		g_Stats[client].xp += total;
@@ -23,7 +26,10 @@ public void	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 	int	level;
 
 	client = GetClientOfUserId(event.GetInt("attacker"));
-	if (IsClientConnected(client) && IsClientInGame(client) && g_Config.xp_max > g_Stats[client].xp)
+	if (0 < client
+	&& IsClientConnected(client)
+	&& IsClientInGame(client)
+	&& g_Config.xp_max > g_Stats[client].xp)
 	{
 		g_Stats[client].xp += g_Config.xp_per_kill;
 		level = CalcLevel(g_Stats[client].xp);
@@ -39,7 +45,9 @@ public void	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
 	int	client;
 
 	client = GetClientOfUserId(event.GetInt("userid"));
-	if (IsClientConnected(client) && IsClientInGame(client))
+	if (0 < client
+	&& IsClientConnected(client)
+	&& IsClientInGame(client))
 	{
 		SetHp(client, g_Stats[client].max_hp);
 		SetArmor(client, g_Stats[client].max_armor);

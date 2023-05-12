@@ -1,10 +1,21 @@
-public Action Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3])
+public Action	Hook_OnTakeDamage(int victim, int &attacker, int &inflictor,
+float &damage, int &damagetype, int &weapon, float damageForce[3],
+float damagePosition[3])
 {
-	if (1 > attacker || 1 > victim || MaxClients < attacker || MaxClients < victim || !IsClientInGame(attacker) || IsFakeClient(attacker))
-	{
-		return Plugin_Continue;
-	}
-	damage *= g_Stats[attacker].damage_mul;
+	Action	ret;
 
-	return Plugin_Changed;
+	ret = Plugin_Continue;
+	if (0 < attacker
+	&& 0 < victim
+	&& MaxClients > attacker
+	&& MaxClients > victim
+	&& IsClientInGame(attacker)
+	&& IsClientInGame(victim)
+	&& IsClientConnected(attacker)
+	&& IsClientConnected(victim))
+	{
+		damage *= g_Stats[attacker].damage_mul;
+		ret = Plugin_Changed;
+	}
+	return ret;
 }

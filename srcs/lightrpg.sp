@@ -31,7 +31,8 @@ public void		OnMapStart()
 		ResetStats(idx);
 	}
 	g_HudSync = CreateHudSynchronizer();
-	CreateTimer(g_Config.hud_refresh, Timer_ShowHud, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
+	CreateTimer(g_Config.hud_refresh, Timer_ShowHud, _,
+	TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 	AddFileToDownloadsTable("sound/lightrpg/lvup.wav");
 	PrecacheSound("lightrpg/lvup.wav");
 }
@@ -53,7 +54,8 @@ static void		LoadConfig()
 	KeyValues	kv;
 	char		buf[128];
 
-	BuildPath(Path_SM, config_path, sizeof(config_path), "configs/lightrpg.txt");
+	BuildPath(Path_SM, config_path,
+	sizeof(config_path), "configs/lightrpg.txt");
 	kv = new KeyValues("LightRPG");
 	kv.ImportFromFile(config_path);
 	kv.GotoFirstSubKey();
