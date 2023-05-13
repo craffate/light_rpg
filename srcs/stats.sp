@@ -1,4 +1,4 @@
-void		ResetStats(int client)
+public void	ResetStats(int client)
 {
 	g_Stats[client].xp = 0;
 	g_Stats[client].level = 1;
@@ -8,7 +8,7 @@ void		ResetStats(int client)
 	g_Stats[client].max_armor = 100;
 }
 
-void		LevelUp(int client)
+public void	LevelUp(int client)
 {
 	int	curr_health;
 	int	curr_armor;
@@ -40,37 +40,37 @@ void		LevelUp(int client)
 	EmitSoundToClient(client, "lightrpg/lvup.wav");
 }
 
-int		CalcLevel(int xp)
+public int	CalcLevel(int xp)
 {
 	return RoundFloat(xp / g_Config.xp_req_mul / g_Config.xp_req);
 }
 
-int		CalcRequiredXp(int level)
+public int	CalcRequiredXp(int level)
 {
 	return RoundFloat(level * g_Config.xp_req_mul * g_Config.xp_req);
 }
 
-void		SetHp(int client, int amount)
+public void	SetHp(int client, int amount)
 {
 	SetEntProp(client, Prop_Send, "m_iHealth", amount);
 }
 
-void		SetMaxHp(int client, int amount)
+public void	SetMaxHp(int client, int amount)
 {
 	SetEntProp(client, Prop_Data, "m_iMaxHealth", amount);
 }
 
-void		SetArmor(int client, int amount)
+public void	SetArmor(int client, int amount)
 {
 	SetEntProp(client, Prop_Send, "m_ArmorValue", amount);
 }
 
-void		GiveHelmet(int client)
+public void	GiveHelmet(int client)
 {
 	SetEntProp(client, Prop_Send, "m_bHasHelmet", 1);
 }
 
-void		SetSpeed(int client, float amount)
+public void	SetSpeed(int client, float amount)
 {
 	SetEntPropFloat(client, Prop_Data, "m_flLaggedMovementValue", amount);
 }
