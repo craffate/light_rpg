@@ -10,9 +10,7 @@ float damagePosition[3])
 	&& MaxClients > attacker
 	&& MaxClients > victim
 	&& IsClientInGame(attacker)
-	&& IsClientInGame(victim)
-	&& IsClientConnected(attacker)
-	&& IsClientConnected(victim))
+	&& IsClientInGame(victim))
 	{
 		damage *= g_Stats[attacker].damage_mul;
 		ret = Plugin_Changed;

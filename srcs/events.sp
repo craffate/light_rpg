@@ -6,7 +6,6 @@ public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 
 	client = GetClientOfUserId(event.GetInt("attacker"));
 	if (0 < client
-	&& IsClientConnected(client)
 	&& IsClientInGame(client)
 	&& g_Config.xp_max > g_Stats[client].xp)
 	{
@@ -27,7 +26,6 @@ public void	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 
 	client = GetClientOfUserId(event.GetInt("attacker"));
 	if (0 < client
-	&& IsClientConnected(client)
 	&& IsClientInGame(client)
 	&& g_Config.xp_max > g_Stats[client].xp)
 	{
@@ -46,7 +44,6 @@ public void	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
 
 	client = GetClientOfUserId(event.GetInt("userid"));
 	if (0 < client
-	&& IsClientConnected(client)
 	&& IsClientInGame(client))
 	{
 		SetHp(client, g_Stats[client].max_hp);

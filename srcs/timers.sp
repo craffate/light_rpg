@@ -7,8 +7,7 @@ public Action	Timer_ShowHud(Handle timer)
 	g_Config.hud_r, g_Config.hud_g, g_Config.hud_b, g_Config.hud_a);
 	while (MaxClients >= ++idx)
 	{
-		if (IsClientConnected(idx)
-		&& IsClientInGame(idx)
+		if (IsClientInGame(idx)
 		&& !IsFakeClient(idx))
 		{
 			ShowSyncHudText(idx, g_HudSync, "%t", "HUD",
