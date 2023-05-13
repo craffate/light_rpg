@@ -11,10 +11,8 @@ public Action	Timer_ShowHud(Handle timer)
 		&& IsClientInGame(idx)
 		&& !IsFakeClient(idx))
 		{
-			ShowSyncHudText(idx, g_HudSync,
-			"Level: %d XP: %d/%d",
-			g_Stats[idx].level,
-			g_Stats[idx].xp,
+			ShowSyncHudText(idx, g_HudSync, "%t", "HUD",
+			g_Stats[idx].level, g_Stats[idx].xp,
 			CalcRequiredXp(g_Stats[idx].level + 1));
 		}
 	}

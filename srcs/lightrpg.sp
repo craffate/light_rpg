@@ -15,6 +15,7 @@ public Plugin		myinfo =
 
 public void		OnPluginStart()
 {
+	LoadTranslations("lightrpg.phrases");
 	LoadConfig();
 	HookEvent("player_spawn", Event_PlayerSpawn, EventHookMode_Post);
 	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Pre);
