@@ -16,6 +16,7 @@ enum struct	Config
 	int	hud_b;
 	int	hud_a;
 	float	hud_refresh;
+	char	sound_lvup[PLATFORM_MAX_PATH];
 	int	hp_per_level;
 	float	damage_mul_per_level;
 	float	speed_mul_per_level;

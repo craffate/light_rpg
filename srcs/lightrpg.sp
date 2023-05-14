@@ -25,6 +25,7 @@ public void		OnPluginStart()
 public void		OnMapStart()
 {
 	int		idx;
+	char		buf[PLATFORM_MAX_PATH];
 
 	idx = 0;
 	while (MaxClients >= ++idx)
@@ -34,8 +35,9 @@ public void		OnMapStart()
 	g_HudSync = CreateHudSynchronizer();
 	CreateTimer(g_Config.hud_refresh, Timer_ShowHud, _,
 	TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
-	AddFileToDownloadsTable("sound/lightrpg/lvup.wav");
-	PrecacheSound("lightrpg/lvup.wav");
+	Format(buf, sizeof(buf), "sound/%s", g_Config.sound_lvup);
+	AddFileToDownloadsTable(buf);
+	PrecacheSound(g_Config.sound_lvup);
 }
 
 public void		OnClientPutInServer(int client)
@@ -80,6 +82,11 @@ static void		LoadConfig()
 			g_Config.hud_b = kv.GetNum("b");
 			g_Config.hud_a = kv.GetNum("a");
 			g_Config.hud_refresh = kv.GetFloat("refresh");
+		}
+		else if (StrEqual(buf, "sounds"))
+		{
+			kv.GetString("lvup", g_Config.sound_lvup,
+			sizeof(g_Config.sound_lvup));
 		}
 		else if (StrEqual(buf, "HP"))
 		{

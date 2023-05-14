@@ -37,7 +37,7 @@ public void	LevelUp(int client)
 	SetHp(client, curr_health + g_Config.hp_per_level);
 	SetArmor(client, armor);
 	SetSpeed(client, g_Stats[client].speed_mul);
-	EmitSoundToClient(client, "lightrpg/lvup.wav");
+	EmitSoundToClient(client, g_Config.sound_lvup);
 }
 
 public int	CalcLevel(int xp)
