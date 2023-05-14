@@ -1,8 +1,4 @@
 #include "lightrpg.inc"
-#include "events.sp"
-#include "stats.sp"
-#include "timers.sp"
-#include "hooks.sp"
 
 public Plugin		myinfo =
 {

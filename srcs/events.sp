@@ -1,3 +1,5 @@
+#include "lightrpg.inc"
+
 public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 {
 	int	client;

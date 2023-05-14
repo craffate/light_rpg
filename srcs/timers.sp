@@ -1,3 +1,5 @@
+#include "lightrpg.inc"
+
 public Action	Timer_ShowHud(Handle timer)
 {
 	int	idx;
