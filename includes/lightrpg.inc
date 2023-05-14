@@ -1,6 +1,10 @@
-#include <sourcemod>
-#include <sdkhooks>
-#include <sdktools>
+#if !defined LIGHTRPG_INC
+
+	#define LIGHTRPG_INC
+
+	#include <sourcemod>
+	#include <sdkhooks>
+	#include <sdktools>
 
 enum struct	Config
 {
@@ -37,3 +41,5 @@ enum struct	Stats
 Config		g_Config;
 Stats		g_Stats[MAXPLAYERS + 1];
 Handle		g_HudSync;
+
+#endif
