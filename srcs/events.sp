@@ -17,7 +17,7 @@ public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 		level = CalcLevel(g_Stats[client].xp);
 		if (g_Stats[client].level < level)
 		{
-			LevelUp(client)
+			LevelUp(client);
 		}
 	}
 }
@@ -37,7 +37,7 @@ public void	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 		level = CalcLevel(g_Stats[client].xp);
 		if (g_Stats[client].level < level)
 		{
-			LevelUp(client)
+			LevelUp(client);
 		}
 	}
 }

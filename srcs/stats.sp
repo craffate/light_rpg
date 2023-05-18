@@ -6,7 +6,7 @@ public void	ResetStats(int client)
 	g_Stats[client].level = 1;
 	g_Stats[client].max_hp = 100;
 	g_Stats[client].damage_mul = 1.0;
-	g_Stats[client].speed_mul = 1.0
+	g_Stats[client].speed_mul = 1.0;
 	g_Stats[client].max_armor = 100;
 }
 
