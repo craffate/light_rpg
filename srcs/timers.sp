@@ -12,9 +12,17 @@ public Action	Timer_ShowHud(Handle timer)
 		if (IsClientInGame(idx)
 		&& !IsFakeClient(idx))
 		{
-			ShowSyncHudText(idx, g_HudSync, "%t", "HUD",
-			g_Stats[idx].level, g_Stats[idx].xp,
-			CalcRequiredXp(g_Stats[idx].level + 1));
+			if (g_Stats[idx].level < CalcLevel(g_Config.xp_max))
+			{
+				ShowSyncHudText(idx, g_HudSync, "%t", "HUD",
+				g_Stats[idx].level, g_Stats[idx].xp,
+				CalcRequiredXp(g_Stats[idx].level + 1));
+			}
+			else
+			{
+				ShowSyncHudText(idx, g_HudSync, "%t",
+				"HUD_MAX");
+			}
 		}
 	}
 	return Plugin_Continue;
