@@ -11,6 +11,7 @@ float damagePosition[3])
 	&& 0 < victim
 	&& MaxClients > attacker
 	&& MaxClients > victim
+	&& !(attacker == victim)
 	&& IsClientInGame(attacker)
 	&& IsClientInGame(victim))
 	{

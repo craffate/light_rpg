@@ -4,23 +4,27 @@ public Action	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 {
 	Action	ret;
 	int	client;
+	int	attacker;
 
 	ret = Plugin_Handled;
-	client = GetClientOfUserId(event.GetInt("attacker"));
-	if (0 == client)
+	client = GetClientOfUserId(event.GetInt("userid"));
+	attacker = GetClientOfUserId(event.GetInt("attacker"));
+	if (0 == client
+	|| 0 == attacker)
 	{
 		ret = Plugin_Continue;
 	}
 	if (Plugin_Handled == ret
-	&& IsClientInGame(client)
-	&& g_Config.xp_max > g_Stats[client].xp
-	&& g_Stats[client].level < CalcLevel(g_Config.xp_max))
+	&& !(client == attacker)
+	&& IsClientInGame(attacker)
+	&& g_Config.xp_max > g_Stats[attacker].xp
+	&& g_Stats[attacker].level < CalcLevel(g_Config.xp_max))
 	{
-		g_Stats[client].xp +=
+		g_Stats[attacker].xp +=
 		RoundFloat(event.GetInt("dmg_health") * g_Config.xp_mul_per_hit);
-		while (g_Stats[client].level < CalcLevel(g_Stats[client].xp))
+		while (g_Stats[attacker].level < CalcLevel(g_Stats[attacker].xp))
 		{
-			LevelUp(client);
+			LevelUp(attacker);
 		}
 	}
 	return ret;
@@ -30,22 +34,26 @@ public Action	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 {
 	Action	ret;
 	int	client;
+	int	attacker;
 
 	ret = Plugin_Handled;
-	client = GetClientOfUserId(event.GetInt("attacker"));
-	if (0 == client)
+	client = GetClientOfUserId(event.GetInt("userid"));
+	attacker = GetClientOfUserId(event.GetInt("attacker"));
+	if (0 == client
+	|| 0 == attacker)
 	{
 		ret = Plugin_Continue;
 	}
 	if (Plugin_Handled == ret
-	&& IsClientInGame(client)
-	&& g_Config.xp_max > g_Stats[client].xp
-	&& g_Stats[client].level < CalcLevel(g_Config.xp_max))
+	&& !(client == attacker)
+	&& IsClientInGame(attacker)
+	&& g_Config.xp_max > g_Stats[attacker].xp
+	&& g_Stats[attacker].level < CalcLevel(g_Config.xp_max))
 	{
-		g_Stats[client].xp += g_Config.xp_per_kill;
-		while (g_Stats[client].level < CalcLevel(g_Stats[client].xp))
+		g_Stats[attacker].xp += g_Config.xp_per_kill;
+		while (g_Stats[attacker].level < CalcLevel(g_Stats[attacker].xp))
 		{
-			LevelUp(client);
+			LevelUp(attacker);
 		}
 	}
 	return ret;
