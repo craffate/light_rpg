@@ -54,7 +54,7 @@ static void		LoadConfig()
 	char		buf[128];
 
 	BuildPath(Path_SM, config_path,
-	sizeof(config_path), "configs/lightrpg.txt");
+	sizeof(config_path), "configs/lightrpg.cfg");
 	kv = new KeyValues("LightRPG");
 	kv.ImportFromFile(config_path);
 	kv.GotoFirstSubKey();
