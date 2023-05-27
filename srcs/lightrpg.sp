@@ -29,11 +29,27 @@ public void		OnMapStart()
 		ResetStats(idx);
 	}
 	g_HudSync = CreateHudSynchronizer();
-	CreateTimer(g_Config.hud_refresh, Timer_ShowHud, _,
-	TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
+	if (INVALID_HANDLE != g_HudSync)
+	{
+		if (INVALID_HANDLE == CreateTimer(g_Config.hud_refresh,
+		Timer_ShowHud, _,
+		TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT))
+		{
+			LogError("Could not create HUD timer.");
+			if (null != g_HudSync)
+			{
+				CloseHandle(g_HudSync);
+				g_HudSync = null;
+			}
+		}
+	}
 	Format(buf, sizeof(buf), "sound/%s", g_Config.sound_lvup);
 	AddFileToDownloadsTable(buf);
-	PrecacheSound(g_Config.sound_lvup);
+	if (false == PrecacheSound(g_Config.sound_lvup))
+	{
+		SetFailState("Could not precache sound %s.",
+		g_Config.sound_lvup);
+	}
 }
 
 public void		OnClientPutInServer(int client)
@@ -56,11 +72,24 @@ static void		LoadConfig()
 	BuildPath(Path_SM, config_path,
 	sizeof(config_path), "configs/lightrpg.cfg");
 	kv = new KeyValues("LightRPG");
-	kv.ImportFromFile(config_path);
-	kv.GotoFirstSubKey();
+	if (INVALID_HANDLE == kv)
+	{
+		SetFailState("Could not initialize configuration file.");
+	}
+	if (false == kv.ImportFromFile(config_path))
+	{
+		SetFailState("Could not read configuration file.");
+	}
+	if (false == kv.GotoFirstSubKey())
+	{
+		SetFailState("Could not find a first subkey in configuration file.");
+	}
 	do
 	{
-		kv.GetSectionName(buf, sizeof(buf));
+		if (false == kv.GetSectionName(buf, sizeof(buf)))
+		{
+			SetFailState("Could not retrieve section name in configuration file.");
+		}
 		if (StrEqual(buf, "XP"))
 		{
 			g_Config.xp_max = kv.GetNum("max");
@@ -102,4 +131,10 @@ static void		LoadConfig()
 			g_Config.armor_give_helmet = kv.GetNum("give_helmet");
 		}
 	} while (kv.GotoNextKey());
+
+	if (null != kv)
+	{
+		CloseHandle(kv);
+		kv = null;
+	}
 }

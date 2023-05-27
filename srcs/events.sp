@@ -1,11 +1,17 @@
 #include "lightrpg.inc"
 
-public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
+public Action	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 {
+	Action	ret;
 	int	client;
 
+	ret = Plugin_Handled;
 	client = GetClientOfUserId(event.GetInt("attacker"));
-	if (0 < client
+	if (0 == client)
+	{
+		ret = Plugin_Continue;
+	}
+	if (Plugin_Handled == ret
 	&& IsClientInGame(client)
 	&& g_Config.xp_max > g_Stats[client].xp
 	&& g_Stats[client].level < CalcLevel(g_Config.xp_max))
@@ -17,14 +23,21 @@ public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 			LevelUp(client);
 		}
 	}
+	return ret;
 }
 
-public void	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
+public Action	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 {
+	Action	ret;
 	int	client;
 
+	ret = Plugin_Handled;
 	client = GetClientOfUserId(event.GetInt("attacker"));
-	if (0 < client
+	if (0 == client)
+	{
+		ret = Plugin_Continue;
+	}
+	if (Plugin_Handled == ret
 	&& IsClientInGame(client)
 	&& g_Config.xp_max > g_Stats[client].xp
 	&& g_Stats[client].level < CalcLevel(g_Config.xp_max))
@@ -35,14 +48,21 @@ public void	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 			LevelUp(client);
 		}
 	}
+	return ret;
 }
 
-public void	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
+public Action	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
 {
+	Action	ret;
 	int	client;
 
+	ret = Plugin_Handled;
 	client = GetClientOfUserId(event.GetInt("userid"));
-	if (0 < client
+	if (0 == client)
+	{
+		ret = Plugin_Continue;
+	}
+	if (Plugin_Handled == ret
 	&& IsClientInGame(client))
 	{
 		SetHp(client, g_Stats[client].max_hp);
@@ -53,4 +73,5 @@ public void	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
 			GiveHelmet(client);
 		}
 	}
+	return ret;
 }
