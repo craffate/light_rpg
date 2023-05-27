@@ -4,7 +4,6 @@ public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 {
 	int	client;
 	int	total;
-	int	level;
 
 	client = GetClientOfUserId(event.GetInt("attacker"));
 	if (0 < client
@@ -14,8 +13,7 @@ public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 	{
 		total = RoundFloat(event.GetInt("dmg_health") * g_Config.xp_mul_per_hit);
 		g_Stats[client].xp += total;
-		level = CalcLevel(g_Stats[client].xp);
-		if (g_Stats[client].level < level)
+		while (g_Stats[client].level < CalcLevel(g_Stats[client].xp))
 		{
 			LevelUp(client);
 		}
@@ -25,7 +23,6 @@ public void	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 public void	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 {
 	int	client;
-	int	level;
 
 	client = GetClientOfUserId(event.GetInt("attacker"));
 	if (0 < client
@@ -34,8 +31,7 @@ public void	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 	&& g_Stats[client].level < CalcLevel(g_Config.xp_max))
 	{
 		g_Stats[client].xp += g_Config.xp_per_kill;
-		level = CalcLevel(g_Stats[client].xp);
-		if (g_Stats[client].level < level)
+		while (g_Stats[client].level < CalcLevel(g_Stats[client].xp))
 		{
 			LevelUp(client);
 		}
