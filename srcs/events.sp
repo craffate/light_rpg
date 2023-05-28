@@ -10,7 +10,8 @@ public Action	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 	client = GetClientOfUserId(event.GetInt("userid"));
 	attacker = GetClientOfUserId(event.GetInt("attacker"));
 	if (0 == client
-	|| 0 == attacker)
+	|| 0 == attacker
+	|| GetClientTeam(client) == GetClientTeam(attacker))
 	{
 		ret = Plugin_Continue;
 	}
@@ -40,7 +41,8 @@ public Action	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 	client = GetClientOfUserId(event.GetInt("userid"));
 	attacker = GetClientOfUserId(event.GetInt("attacker"));
 	if (0 == client
-	|| 0 == attacker)
+	|| 0 == attacker
+	|| GetClientTeam(client) == GetClientTeam(attacker))
 	{
 		ret = Plugin_Continue;
 	}
