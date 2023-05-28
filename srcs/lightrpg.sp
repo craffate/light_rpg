@@ -4,8 +4,8 @@ public Plugin		myinfo =
 {
 	name = "Light RPG",
 	author = "exha",
-	description = "Light RPG",
-	version = "0.1",
+	description = "Simple role-playing game.",
+	version = VERSION,
 	url = ""
 };
 
