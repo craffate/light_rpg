@@ -15,7 +15,7 @@ public void		OnPluginStart()
 	LoadConfig();
 	HookEvent("player_spawn", Event_PlayerSpawn, EventHookMode_Post);
 	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Pre);
-	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
+	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Post);
 }
 
 public void		OnMapStart()
