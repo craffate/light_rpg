@@ -1,7 +1,7 @@
 #if !defined LIGHTRPG_INC
 	#define LIGHTRPG_INC
 
-	#define VERSION "1.0.1"
+	#define VERSION "1.0.2"
 
 	#include <sourcemod>
 	#include <sdkhooks>

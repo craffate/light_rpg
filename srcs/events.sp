@@ -2,21 +2,15 @@
 
 public Action	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 {
-	Action	ret;
 	int	client;
 	int	attacker;
 
-	ret = Plugin_Handled;
 	client = GetClientOfUserId(event.GetInt("userid"));
 	attacker = GetClientOfUserId(event.GetInt("attacker"));
-	if (0 == client
-	|| 0 == attacker
-	|| GetClientTeam(client) == GetClientTeam(attacker))
-	{
-		ret = Plugin_Continue;
-	}
-	if (Plugin_Handled == ret
+	if (!(0 == client)
+	&& !(0 == attacker)
 	&& !(client == attacker)
+	&& !(GetClientTeam(client) == GetClientTeam(attacker))
 	&& IsClientInGame(attacker)
 	&& g_Config.xp_max > g_Stats[attacker].xp
 	&& g_Stats[attacker].level < CalcLevel(g_Config.xp_max))
@@ -28,25 +22,20 @@ public Action	Event_PlayerHurt(Event event, char[] name, bool dontBroadcast)
 			LevelUp(attacker);
 		}
 	}
-	return ret;
+	return Plugin_Continue;
 }
 
 public Action	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 {
-	Action	ret;
 	int	client;
 	int	attacker;
 
-	ret = Plugin_Handled;
 	client = GetClientOfUserId(event.GetInt("userid"));
 	attacker = GetClientOfUserId(event.GetInt("attacker"));
-	if (0 == client
-	|| 0 == attacker
-	|| GetClientTeam(client) == GetClientTeam(attacker))
-	{
-		ret = Plugin_Continue;
-	}
-	if (Plugin_Handled == ret
+	if (!(0 == client)
+	&& !(0 == attacker)
+	&& !(client == attacker)
+	&& !(GetClientTeam(client) == GetClientTeam(attacker))
 	&& !(client == attacker)
 	&& IsClientInGame(attacker)
 	&& g_Config.xp_max > g_Stats[attacker].xp
@@ -58,21 +47,15 @@ public Action	Event_PlayerDeath(Event event, char[] name, bool dontBroadcast)
 			LevelUp(attacker);
 		}
 	}
-	return ret;
+	return Plugin_Continue;
 }
 
 public Action	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
 {
-	Action	ret;
 	int	client;
 
-	ret = Plugin_Handled;
 	client = GetClientOfUserId(event.GetInt("userid"));
-	if (0 == client)
-	{
-		ret = Plugin_Continue;
-	}
-	if (Plugin_Handled == ret
+	if (!(0 == client)
 	&& IsClientInGame(client))
 	{
 		SetHp(client, g_Stats[client].max_hp);
@@ -83,5 +66,5 @@ public Action	Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast)
 			GiveHelmet(client);
 		}
 	}
-	return ret;
+	return Plugin_Continue;
 }
